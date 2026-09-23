@@ -1,0 +1,1409 @@
+/* ==========================================================================
+   Google Style Start Page - Modern Design System (style.css)
+   ========================================================================== */
+
+/* 1. CSS Reset & Variables */
+:root {
+  /* Google Core Colors */
+  --google-blue: #4285f4;
+  --google-red: #ea4335;
+  --google-yellow: #fbbc05;
+  --google-green: #34a853;
+  --google-blue-hover: #1a73e8;
+
+  /* Light Theme Tokens */
+  --bg-primary: #f8f9fa;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f3f4;
+  --bg-surface-subtle: #f8f9fa;
+  
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-muted: #80868b;
+  
+  --border-color: #dfe1e5;
+  --border-focus: #4285f4;
+  
+  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.24);
+  --shadow-md: 0 2px 8px rgba(60, 64, 67, 0.15);
+  --shadow-search: 0 1px 6px rgba(32, 33, 36, 0.28);
+  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(223, 225, 229, 0.7);
+  --backdrop-blur: 16px;
+  
+  --btn-bg: #f8f9fa;
+  --btn-border: #f8f9fa;
+  --btn-text: #3c4043;
+  --btn-hover-bg: #f1f3f4;
+  --btn-hover-border: #dadce0;
+
+  --accent-glow-seoul: rgba(66, 133, 244, 0.12);
+  --accent-glow-jeju: rgba(52, 168, 83, 0.12);
+
+  --font-main: 'Outfit', 'Google Sans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Tokens */
+  --bg-primary: #202124;
+  --bg-surface: #303134;
+  --bg-surface-hover: #3c4043;
+  --bg-surface-subtle: #292a2d;
+
+  --text-primary: #e8eaed;
+  --text-secondary: #bdc1c6;
+  --text-muted: #9aa0a6;
+
+  --border-color: #5f6368;
+  --border-focus: #8ab4f8;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.5);
+  --shadow-search: 0 1px 8px rgba(0, 0, 0, 0.6);
+  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  --card-bg: rgba(48, 49, 52, 0.82);
+  --card-border: rgba(95, 99, 104, 0.45);
+
+  --btn-bg: #303134;
+  --btn-border: #303134;
+  --btn-text: #e8eaed;
+  --btn-hover-bg: #3c4043;
+  --btn-hover-border: #5f6368;
+
+  --accent-glow-seoul: rgba(138, 180, 248, 0.15);
+  --accent-glow-jeju: rgba(129, 201, 149, 0.15);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  position: relative;
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--accent-glow-seoul) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, var(--accent-glow-jeju) 0%, transparent 45%);
+}
+
+/* ==========================================================================
+   2. Header & Navigation
+   ========================================================================== */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* SDU Brand Logo Link Badge */
+.sdu-brand-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sdu-logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px 6px 8px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.sdu-brand-link:hover .sdu-logo-badge {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #0066d6;
+  background: var(--bg-surface-hover);
+}
+
+.sdu-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 51, 128, 0.25);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.sdu-brand-link:hover .sdu-logo-icon {
+  transform: scale(1.05);
+}
+
+.sdu-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.sdu-korean-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.sdu-brand-link:hover .sdu-korean-title {
+  color: #0066d6;
+}
+
+.sdu-sub-title {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.6px;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.sdu-external-icon {
+  color: var(--text-muted);
+  margin-left: 2px;
+  transition: var(--transition-smooth);
+}
+
+.sdu-brand-link:hover .sdu-external-icon {
+  color: #0066d6;
+  transform: translate(2px, -2px);
+}
+
+.header-divider {
+  width: 1px;
+  height: 30px;
+  background-color: var(--border-color);
+}
+
+.time-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.date-text {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Weather Mini Pills in Header */
+.weather-pill-container {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-surface);
+  padding: 4px 6px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.weather-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.weather-pill:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-hover);
+}
+
+.weather-pill.active {
+  background: var(--bg-surface-hover);
+  color: var(--google-blue);
+  font-weight: 600;
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+}
+
+.weather-pill.active .pill-dot {
+  background-color: var(--google-blue);
+  box-shadow: 0 0 6px var(--google-blue);
+}
+
+.pill-temp {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pill-icon {
+  font-size: 0.95rem;
+}
+
+/* Icon Buttons (Theme toggle, Apps) */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+
+.theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: block;
+  color: #fbbc05;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: none;
+}
+
+/* Google Apps Dropdown */
+.google-apps-wrapper {
+  position: relative;
+}
+
+.apps-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-float);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transition: var(--transition-smooth);
+  z-index: 200;
+}
+
+.apps-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+}
+
+.app-item:hover {
+  background-color: var(--bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+.app-icon {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.app-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   3. Main Content Container
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   4. Weather Dashboard Section
+   ========================================================================== */
+.weather-dashboard {
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+.weather-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.weather-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weather-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(66, 133, 244, 0.12);
+  color: var(--google-blue);
+}
+
+.weather-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.weather-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.city-selector-tabs {
+  display: flex;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.city-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+.city-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.city-tab-btn.active {
+  background: var(--bg-surface-hover);
+  color: var(--google-blue);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.weather-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.weather-refresh-btn:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.weather-refresh-btn.spinning svg {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.weather-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.weather-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.weather-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(66, 133, 244, 0.4);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.city-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
+.city-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.city-en {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.weather-condition-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.weather-card:hover .weather-condition-icon {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.card-temp-main {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.temp-val {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.temp-unit {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+.weather-status-badge {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.card-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-icon {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   5. Google Logo & Search Section
+   ========================================================================== */
+.logo-section {
+  margin-bottom: 24px;
+  user-select: none;
+}
+
+.google-logo {
+  font-size: 4.8rem;
+  font-weight: 700;
+  letter-spacing: -2px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.google-logo:hover {
+  transform: scale(1.03);
+}
+
+.g-blue { color: var(--google-blue); }
+.g-red { color: var(--google-red); }
+.g-yellow { color: var(--google-yellow); }
+.g-green { color: var(--google-green); }
+
+.search-section {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.search-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.search-bar {
+  width: 100%;
+  height: 52px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.search-bar:hover,
+.search-bar:focus-within {
+  box-shadow: var(--shadow-search);
+  border-color: rgba(223, 225, 229, 0);
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .search-bar:hover,
+[data-theme="dark"] .search-bar:focus-within {
+  border-color: rgba(95, 99, 104, 0);
+}
+
+.search-icon-wrapper {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  margin-right: 12px;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+}
+
+.search-clear-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-hover);
+}
+
+.search-clear-btn.visible {
+  display: flex;
+}
+
+.search-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.tool-btn:hover {
+  color: var(--google-blue);
+  background: var(--bg-surface-hover);
+}
+
+.search-buttons-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.google-btn {
+  background-color: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.google-btn:hover {
+  background-color: var(--btn-hover-bg);
+  border-color: var(--btn-hover-border);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.btn-primary {
+  background-color: var(--google-blue);
+  border-color: var(--google-blue);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--google-blue-hover);
+  border-color: var(--google-blue-hover);
+  color: #ffffff;
+}
+
+/* Recent Searches Dropdown */
+.recent-searches-box {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border-radius: 0 0 24px 24px;
+  box-shadow: var(--shadow-search);
+  padding: 16px 14px 10px;
+  display: none;
+  z-index: 9;
+  border-top: 1px solid var(--border-color);
+}
+
+.recent-searches-box.show {
+  display: block;
+}
+
+.recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0 8px 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.clear-all-history-btn {
+  background: transparent;
+  border: none;
+  color: var(--google-blue);
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.clear-all-history-btn:hover {
+  text-decoration: underline;
+}
+
+.recent-list {
+  list-style: none;
+  margin-top: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.recent-item:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.recent-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.recent-item-delete {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.recent-item-delete:hover {
+  color: var(--google-red);
+}
+
+/* ==========================================================================
+   6. Shortcuts Section
+   ========================================================================== */
+.shortcuts-section {
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 36px;
+}
+
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 12px;
+  justify-items: center;
+}
+
+.shortcut-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  width: 84px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.shortcut-card:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.shortcut-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.shortcut-card:hover .shortcut-icon-wrap {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.shortcut-title {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: center;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shortcut-delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 11px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.shortcut-card:hover .shortcut-delete-btn {
+  display: flex;
+}
+
+.shortcut-delete-btn:hover {
+  background: var(--google-red);
+  color: #fff;
+  border-color: var(--google-red);
+}
+
+.add-shortcut-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.add-shortcut-btn .shortcut-icon-wrap {
+  border-style: dashed;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   7. Today's Quote Section (명언)
+   ========================================================================== */
+.quote-section {
+  width: 100%;
+  max-width: 740px;
+  margin-top: auto;
+}
+
+.quote-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.quote-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(66, 133, 244, 0.35);
+}
+
+.quote-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.quote-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--google-blue);
+  background: rgba(66, 133, 244, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.quote-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quote-action-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.quote-action-btn:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.quote-action-btn.spinning svg {
+  animation: spin 0.6s ease;
+}
+
+.action-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  background: #202124;
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: var(--transition-smooth);
+}
+
+[data-theme="dark"] .action-tooltip {
+  background: #e8eaed;
+  color: #202124;
+}
+
+.action-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote-body {
+  position: relative;
+  padding: 0 14px;
+  margin-bottom: 14px;
+}
+
+.quote-mark {
+  font-family: Georgia, serif;
+  font-size: 2.2rem;
+  color: var(--google-blue);
+  line-height: 0;
+  opacity: 0.6;
+  position: relative;
+}
+
+.quote-mark.open-mark {
+  vertical-align: sub;
+  margin-right: 6px;
+}
+
+.quote-mark.close-mark {
+  vertical-align: super;
+  margin-left: 6px;
+}
+
+.quote-text {
+  display: inline;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-primary);
+  word-break: keep-all;
+  transition: opacity 0.3s ease;
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.quote-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.author-dash {
+  color: var(--text-muted);
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.quote-category {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   8. Modal & Toast
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-smooth);
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: var(--bg-surface);
+  width: 90%;
+  max-width: 420px;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-float);
+  border: 1px solid var(--border-color);
+  transform: scale(0.95);
+  transition: var(--transition-smooth);
+}
+
+.modal-overlay.show .modal-card {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-group input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface-subtle);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* Toast Message */
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: #202124;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-smooth);
+}
+
+[data-theme="dark"] .toast-message {
+  background: #e8eaed;
+  color: #202124;
+}
+
+.toast-message.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   9. Footer
+   ========================================================================== */
+.bottom-footer {
+  width: 100%;
+  background: var(--bg-surface-subtle);
+  border-top: 1px solid var(--border-color);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-dot {
+  color: var(--text-muted);
+}
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-right a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   10. Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .header-left {
+    gap: 8px;
+  }
+
+  .sdu-sub-title {
+    display: none;
+  }
+
+  .sdu-logo-badge {
+    padding: 4px 10px 4px 6px;
+    gap: 6px;
+  }
+
+  .sdu-korean-title {
+    font-size: 0.82rem;
+  }
+
+  .sdu-logo-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-divider {
+    height: 20px;
+  }
+
+  .time-text {
+    font-size: 1rem;
+  }
+
+  .date-text {
+    font-size: 0.72rem;
+  }
+  
+  .weather-pill-container {
+    display: none;
+  }
+
+  .weather-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .google-logo {
+    font-size: 3.6rem;
+  }
+
+  .main-content {
+    padding: 8px 16px 36px;
+  }
+
+  .bottom-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+  }
+}
